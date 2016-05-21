@@ -1,0 +1,19 @@
+{
+  "name": "jroc",
+  "description": "James River Outdoor Coalition Custom Theme",
+  "main": "Gruntfile.js",
+  "authors": [
+    "Matthew Rosenberg"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "www.jroc.net",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,40 @@
+/* Titles
+--------------------------------------------- */
+
+.archive-title {
+  font-size: 20px;
+}
+
+.entry-title {
+  font-size: 36px;
+}
+
+.jroc-landing .entry-title {
+  margin-bottom: 30px;
+}
+
+.entry-title a {
+  color: #333;
+}
+
+.entry-title a:hover {
+  color: #22a3d9;
+}
+
+.widget-title {
+  font-size: 30px;
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.after-entry .widget-title,
+.footer-widgets .widget-title {
+  font-size: 24px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.footer-widgets .widget-title {
+  color: #fff;
+}

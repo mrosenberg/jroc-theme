@@ -1,0 +1,29 @@
+/* Avatar
+--------------------------------------------- */
+
+.avatar {
+  float: left;
+}
+
+.author-box .avatar {
+  height: 85px;
+  width: 85px;
+}
+
+.entry-comments .avatar {
+  height: 60px;
+  width: 60px;
+}
+
+.alignleft .avatar,
+.author-box .avatar {
+  margin-right: 24px;
+}
+
+.alignright .avatar {
+  margin-left: 24px;
+}
+
+.comment .avatar {
+  margin: 0 16px 24px 0;
+}

@@ -1,0 +1,197 @@
+/*
+Media Queries
+---------------------------------------------------------------------------------------------------- */
+
+@media only screen and (max-width: 1080px) {
+
+  .wrap {
+    max-width: 960px;
+  }
+
+}
+
+@media only screen and (max-width: 960px) {
+
+  .home-intro {
+    padding-top: 90px;
+  }
+
+  .footer-widgets-1,
+  .footer-widgets-2,
+  .footer-widgets-3 {
+    width: 100%;
+  }
+
+  .footer-widgets-1 {
+    margin-right: 0;
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+
+  .content,
+  .home-pricing .wrap,
+  .wrap {
+    width: 100%;
+  }
+
+  .content,
+  .site-footer,
+  .wrap {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .home-intro .one-half.first,
+  .jroc-home .content {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .five-sixths,
+  .four-sixths,
+  .home-features .one-third,
+  .home-intro .one-half.first,
+  .home-section .featuredpost .entry,
+  .one-fourth,
+  .one-half,
+  .one-sixth,
+  .one-third,
+  .pricing-table .one-third,
+  .three-fourths,
+  .three-sixths,
+  .two-fourths,
+  .two-sixths,
+  .two-thirds {
+    margin: 0;
+    width: 100%;
+  }
+
+  .genesis-nav-menu.responsive-menu .sub-menu:after,
+  .genesis-nav-menu.responsive-menu .sub-menu:before,
+  .genesis-nav-menu.responsive-menu > .menu-item > .sub-menu,
+  .genesis-nav-menu.responsive-menu {
+    display: none;
+  }
+
+  .genesis-nav-menu.responsive-menu .menu-item,
+  .responsive-menu-icon {
+    display: block;
+  }
+
+  .genesis-nav-menu.responsive-menu .menu-item {
+    text-align: left;
+  }
+
+  .genesis-nav-menu.responsive-menu .menu-item:hover {
+    position: static;
+  }
+
+  .genesis-nav-menu.responsive-menu li a,
+  .genesis-nav-menu.responsive-menu li a:hover {
+    display: block;
+    line-height: 1;
+    padding: 16px 20px;
+  }
+
+  .nav-primary .genesis-nav-menu.responsive-menu a,
+  .nav-primary .genesis-nav-menu.responsive-menu a:hover {
+    font-size: 14px;
+    color: #000;
+  }
+
+  .nav-secondary .genesis-nav-menu.responsive-menu a,
+  .nav-secondary .genesis-nav-menu.responsive-menu a:hover {
+    color: #fff;
+  }
+
+  .genesis-nav-menu.responsive-menu .menu-item-has-children {
+    cursor: pointer;
+  }
+
+  .genesis-nav-menu.responsive-menu .menu-item-has-children > a {
+    margin-right: 60px;
+  }
+
+  .genesis-nav-menu.responsive-menu > .menu-item-has-children:before {
+    content: "\f347";
+    float: right;
+    font: normal 16px/1 'dashicons';
+    height: 16px;
+    padding: 14px 20px;
+    right: 0;
+    text-align: right;
+    z-index: 9999;
+  }
+
+  .genesis-nav-menu.responsive-menu .menu-open.menu-item-has-children:before {
+    content: "\f343";
+  }
+
+  .genesis-nav-menu.responsive-menu .sub-menu {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .genesis-nav-menu .menu-item:hover > .sub-menu > .menu-item:hover > .sub-menu,
+  .genesis-nav-menu .menu-item:hover > .sub-menu,
+  .genesis-nav-menu.responsive-menu .sub-menu {
+    left: auto;
+    opacity: 1;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+  }
+
+  .genesis-nav-menu.responsive-menu .sub-menu .sub-menu {
+    background-color: transparent;
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .genesis-nav-menu.responsive-menu .sub-menu li a,
+  .genesis-nav-menu.responsive-menu .sub-menu li a:hover {
+    background: none;
+    border: none;
+    padding: 14px 20px;
+    position: relative;
+    width: 100%;
+  }
+
+  .header-image .site-title {
+    padding: 0 5px;
+  }
+
+  .home-intro {
+    height: auto;
+    text-align: center;
+  }
+
+  .home-intro .one-half.first,
+  .home-features .one-third {
+    margin-bottom: 40px;
+  }
+
+  .pricing-table .one-third:nth-child(3n),
+  .pricing-table .one-third:nth-child(3n+1),
+  .pricing-table .one-third:nth-child(3n+2) {
+    margin-bottom: 40px;
+  }
+
+  .home-features,
+  .home-intro,
+  .home-pricing,
+  .home-social {
+    padding-bottom: 60px;
+    padding-bottom: 60px;
+  }
+
+  .pricing-table .one-third:nth-child(3n+1) {
+    border-right: 1px solid #333;
+  }
+
+  .pricing-table .one-third:nth-child(3n) {
+    border-left: 1px solid #333;
+  }
+
+}

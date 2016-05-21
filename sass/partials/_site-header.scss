@@ -1,0 +1,60 @@
+/*
+Site Header
+---------------------------------------------------------------------------------------------------- */
+
+.site-header {
+  background-color: #333;
+  padding-bottom: 80px;
+  text-align: center;
+}
+
+.site-description,
+.site-title {
+  font-family: Montserrat, sans-serif;
+  line-height: 1;
+  margin-bottom: 0;
+  text-transform: uppercase;
+}
+
+.site-title {
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 10px;
+  margin-top: 70px;
+}
+
+.site-title a,
+.site-title a:hover {
+  color: #fff;
+}
+
+.header-image .site-title {
+  margin: 40px 0 0;
+}
+
+.header-image .site-title > a {
+  background-size: contain !important;
+  display: block;
+  margin: 0 auto;
+  max-width: 320px;
+  min-height: 80px;
+  width: 100%;
+}
+
+.site-description {
+  color: #ccc;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+
+.header-image .site-description,
+.header-image .site-title {
+  display: block;
+  text-indent: -9999px;
+}
+
+.header-image .site-description {
+  height: 0;
+}
