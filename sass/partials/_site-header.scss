@@ -4,57 +4,80 @@ Site Header
 
 .site-header {
   background-color: #333;
-  padding-bottom: 80px;
+  padding-bottom: 1rem;
   text-align: center;
-}
 
-.site-description,
-.site-title {
-  font-family: Montserrat, sans-serif;
-  line-height: 1;
-  margin-bottom: 0;
-  text-transform: uppercase;
-}
+  p {
+    margin:0 0 1rem 0;
+  }
 
-.site-title {
-  font-size: 30px;
-  font-weight: 700;
-  letter-spacing: 5px;
-  margin-bottom: 10px;
-  margin-top: 70px;
-}
+  .title-area {
+    @include breakpoint( $brook ) {
+      width:33%;
+      float:left;
+    }
 
-.site-title a,
-.site-title a:hover {
-  color: #fff;
-}
+    .site-description,
+    .site-title {
+      font-family: Montserrat, sans-serif;
+      line-height: 1;
+      margin-bottom: 0;
+      text-transform: uppercase;
+    }
 
-.header-image .site-title {
-  margin: 40px 0 0;
-}
+    .site-title {
 
-.header-image .site-title > a {
-  background-size: contain !important;
-  display: block;
-  margin: 0 auto;
-  max-width: 320px;
-  min-height: 80px;
-  width: 100%;
-}
+      a {
+        width:50%;
+        display: block;
+        margin: 0 auto;
 
-.site-description {
-  color: #ccc;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 3px;
-}
+        svg {
+          width:100%;
+          height:auto;
+          margin:0 auto;
+        }
+      }
+    }
 
-.header-image .site-description,
-.header-image .site-title {
-  display: block;
-  text-indent: -9999px;
-}
+    .site-description {
+      color: #ccc;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 3px;
+    }
+  }
 
-.header-image .site-description {
-  height: 0;
+
+  .weather-area {
+    color:#ccc;
+    margin-top:1.5rem;
+    @include breakpoint( $brook ) {
+      width:33%;
+      float:left;
+
+      canvas {
+        float:left;
+        margin:-1.5rem -3rem 0 3rem;
+      }
+    }
+
+    span.dark-sky-metric {
+      display: block;
+    }
+  }
+
+
+  .river-area {
+    color:#ccc;
+    margin-top:1.5rem;
+    @include breakpoint( $brook ) {
+      width:33%;
+      float:left;
+    }
+
+    span.river-metric {
+      display: block;
+    }
+  }
 }

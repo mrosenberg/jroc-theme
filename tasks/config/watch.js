@@ -16,6 +16,14 @@ module.exports = function(grunt) {
       options: {
         livereload: true
       }
+    },
+
+    js: {
+      files: ['**/**/theme/js/*.js'],
+      tasks: ['copy:dev'],
+      options: {
+        livereload: true
+      }
     }
 	});
 

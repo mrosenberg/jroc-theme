@@ -1,0 +1,18 @@
+/**
+ ** Breakpoints
+ ** http://breakpoint-sass.com/
+ **
+ ** Assumes min-width with only one value
+ **
+**/
+
+// Max Width
+$max-container-width: 70rem;
+
+$river: $max-container-width;
+$creek: 65rem;
+$stream: 55rem;
+$brook: 50rem;
+$small: max-width $brook;
+$large: min-width $brook;
+$hidpi: min-resolution 1.5dppx;

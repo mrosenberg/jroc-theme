@@ -17,9 +17,8 @@ function jroc_customizer(){
 }
 
 //* Child theme (do not remove)
-define( 'CHILD_THEME_NAME', __( 'Remobile Pro Theme', 'jroc' ) );
-define( 'CHILD_THEME_URL', 'http://my.studiopress.com/themes/jroc/' );
-define( 'CHILD_THEME_VERSION', '1.0.2' );
+define( 'CHILD_THEME_NAME', __( 'James River Outdoor Coalition', 'jroc' ) );
+define( 'CHILD_THEME_VERSION', '1.0.0' );
 
 //* Enqueue scripts and style
 add_action( 'wp_enqueue_scripts', 'jroc_enqueue_styles' );
@@ -27,8 +26,14 @@ function jroc_enqueue_styles() {
 
 	wp_enqueue_script( 'jroc-responsive-menu', get_bloginfo( 'stylesheet_directory' ) . '/js/responsive-menu.js', array( 'jquery' ), '1.0.0' );
 
+  // wp_enqueue_script( 'jroc-high-charts', get_bloginfo( 'stylesheet_directory' ) . '/js/high-charts.js', array(  ), '1.0.0', true );
+
+  wp_enqueue_script( 'jroc-darksky', get_bloginfo( 'stylesheet_directory' ) . '/js/darksky.js', array( 'jquery' ), '1.0.0' );
+
+  wp_enqueue_script( 'jroc-modernizr', get_bloginfo( 'stylesheet_directory' ) . '/js/modernizr.js', array(), '3.3.1' );
+
 	wp_enqueue_style( 'dashicons' );
-	wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Montserrat:400,700|Neuton:300,700', array(), CHILD_THEME_VERSION );
+	// wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Montserrat:400,700|Neuton:300,700', array(), CHILD_THEME_VERSION );
 
 }
 
@@ -38,13 +43,6 @@ add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list'
 //* Add viewport meta tag for mobile browsers
 add_theme_support( 'genesis-responsive-viewport' );
 
-//* Add support for custom header
-add_theme_support( 'custom-header', array(
-	'width'           => 320,
-	'height'          => 80,
-	'header-selector' => '.site-title a',
-	'header-text'     => false,
-) );
 
 //* Unregister layout settings
 genesis_unregister_layout( 'content-sidebar' );
@@ -142,11 +140,6 @@ genesis_register_sidebar( array(
 	'description' => __( 'This is the home intro section.', 'jroc' ),
 ) );
 genesis_register_sidebar( array(
-	'id'          => 'home-pricing',
-	'name'        => __( 'Home Pricing', 'jroc' ),
-	'description' => __( 'This is the home pricing section.', 'jroc' ),
-) );
-genesis_register_sidebar( array(
 	'id'          => 'home-features',
 	'name'        => __( 'Home Features', 'jroc' ),
 	'description' => __( 'This is the home features section.', 'jroc' ),
@@ -156,3 +149,179 @@ genesis_register_sidebar( array(
 	'name'        => __( 'Home Social', 'jroc' ),
 	'description' => __( 'This is the home social section.', 'jroc' ),
 ) );
+
+
+add_filter( 'genesis_seo_title', 'jroc_site_title_logo' ,10, 3 );
+function jroc_site_title_logo( $title, $inside, $wrap ) {
+
+  $link = get_bloginfo( 'url' );
+  $logo = file_get_contents( 'images/inline-logo.svg', true );
+
+  return sprintf( '<%s class="site-title"><a href="%s">%s</a></%s>', $wrap, $link, $logo, $wrap );
+}
+
+
+add_action( 'genesis_header', 'jroc_weather_info' );
+function jroc_weather_info() {
+
+  if( !is_front_page() ) return;
+
+  $transient = 'darksky-forecast';
+
+  $url = sprintf( 'https://api.forecast.io/forecast/%s/%s,%s,%s', '0ee3b4a4c6b52530fa0cb0cfa0bee9ea', 37.528452, -77.456574, time() );
+
+  // Check if our data has been cached
+  if ( false === ( $forecast = get_transient( $transient ) ) ) {
+
+    // It wasn't there, so regenerate the data and save the transient
+    $forecast = jroc_dark_sky_request( $url );
+
+    // Let's now save the new data
+    set_transient( $transient, $forecast, 60 * 15 );
+  }
+
+  $icon        = $forecast['currently']['icon'];
+  $temp        = $forecast['currently']['temperature'];
+  $windSpeed   = $forecast['currently']['windSpeed'];
+  $windBearing = $forecast['currently']['windBearing'];
+  $visibility  = $forecast['currently']['visibility'];
+  $pressure    = $forecast['currently']['pressure'];
+
+  $html  = '<div class="weather-area">';
+
+  $html .= '<p>Weather Conditions</p>';
+
+  $html .= "<canvas class='dark-sky-metric dark-sky-icon' data-icon='{$icon}' width='128' height='128'></canvas>";
+
+  $html .= "<span class='dark-sky-metric dark-sky-temp'><i class='wi wi-thermometer-exterior
+'></i> {$temp}&#176;F</span>";
+
+  $html .= "<span class='dark-sky-metric dark-sky-windspeed'><i class='wi wi-windy'></i> {$windSpeed} <span class='dark-sky-suffix'>mph</span></span>";
+
+  $html .= '</div>';
+
+  echo $html;
+}
+
+
+add_action( 'genesis_header', 'jroc_river_info' );
+function jroc_river_info() {
+
+  if( !is_front_page() ) return;
+
+
+  $transient = 'westham-level';
+
+  $url = 'http://waterservices.usgs.gov/nwis/iv/?format=json&sites=02037500';
+
+  // Check if our data has been cached
+  if ( false === ( $level = get_transient( $transient ) ) ) {
+
+    // It wasn't there, so regenerate the data and save the transient
+    $level = jroc_usgs_request( $url );
+
+    // Let's now save the new data
+    set_transient( $transient, $level, 60 * 15 );
+  }
+
+  $feet_second = number_format( $level['value']['timeSeries'][0]['values'][0]['value'][0]['value'] );
+  $height      = $level['value']['timeSeries'][1]['values'][0]['value'][0]['value'];
+
+  $html  = '<div class="river-area">';
+  $html .= '<p>River Level</p>';
+  $html .= "<span class='river-metric ft-per-second'>{$feet_second} ft&#179;/s</span>";
+  $html .= "<span class='river-metric height'>{$height} ft</span>";
+  $html .= '</div>';
+
+  echo $html;
+}
+
+
+function jroc_usgs_request( $url ) {
+
+  $response = wp_remote_get( $url );
+
+  if ($response === false) {
+      throw new \Exception('There was an error contacting the DarkSky API.');
+  }
+
+  $json = json_decode($response['body'], true);
+
+  if ($json === null) {
+    switch($error_code = json_last_error()) {
+      case JSON_ERROR_SYNTAX:
+          $reason = 'Bad JSON Syntax';
+          break;
+      case JSON_ERROR_CTRL_CHAR:
+          $reason = 'Unexpected control character found';
+          break;
+      default:
+          $reason = sprintf('Unknown error. Error code %s', $error_code);
+          break;
+    }
+
+    throw new \Exception(sprintf('Unable to decode JSON response: %s', $reason));
+  }
+
+  return $json;
+}
+
+
+function jroc_dark_sky_request( $url ) {
+
+  $response = wp_remote_get( $url );
+
+  if ($response === false) {
+      throw new \Exception('There was an error contacting the DarkSky API.');
+  }
+
+  $json = json_decode($response['body'], true);
+
+  if ($json === null) {
+    switch($error_code = json_last_error()) {
+      case JSON_ERROR_SYNTAX:
+          $reason = 'Bad JSON Syntax';
+          break;
+      case JSON_ERROR_CTRL_CHAR:
+          $reason = 'Unexpected control character found';
+          break;
+      default:
+          $reason = sprintf('Unknown error. Error code %s', $error_code);
+          break;
+    }
+
+    throw new \Exception(sprintf('Unable to decode JSON response: %s', $reason));
+  }
+
+  return $json;
+}
+
+
+add_filter( 'genesis_footer_creds_text', 'jroc_footer_creds_text' );
+function jroc_footer_creds_text( $creds ) {
+
+  $url  = get_bloginfo( 'url' );
+  $name = get_bloginfo( 'name' );
+
+  $creds  = '<p>[footer_copyright] &middot ';
+  $creds .= sprintf( '<a href="%s">%s</a> &middot 501(c)(3)</p>', $url, $name );
+  $creds .= '<p>JROC c/o James River Park P.O. Box 297 Richmond, Va. 23219</p>';
+  $creds .= '<a href="contact-us">Contact JROC</a> &middot [footer_loginout]';
+
+  return $creds;
+}
+
+
+// add_action( 'wp_footer', 'jroc_svg_blur_filter' );
+function jroc_svg_blur_filter() {
+
+  echo '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="0">
+    <defs>
+      <filter id="blur">
+        <feGaussianBlur stdDeviation="5" />
+      </filter>
+    </defs>
+  </svg>';
+
+}
+
