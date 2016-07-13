@@ -77,6 +77,26 @@ add_theme_support( 'genesis-structural-wraps', array(
 //* Rename primary and secondary navigation menus
 add_theme_support( 'genesis-menus' , array( 'primary' => __( 'Before Header Menu', 'jroc' ), 'secondary' => __( 'Footer Menu', 'jroc' ) ) );
 
+
+add_action( 'genesis_before', 'jroc_gtm_container' );
+function jroc_gtm_container() {
+
+  echo "\r\n";
+?>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-P8SL33"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P8SL33');</script>
+<!-- End Google Tag Manager -->
+
+<?php
+  echo "\r\n";
+}
+
 //* Reposition the primary navigation menu
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
 add_action( 'genesis_header', 'genesis_do_nav', 5 );
@@ -307,9 +327,11 @@ function jroc_footer_creds_text( $creds ) {
   $creds .= sprintf( '<a href="%s">%s</a> &middot 501(c)(3)</p>', $url, $name );
   $creds .= '<p>JROC c/o James River Park P.O. Box 297 Richmond, Va. 23219</p>';
   $creds .= '<a href="contact-us">Contact JROC</a> &middot [footer_loginout]';
+  $creds .= '<p>Website hosting sponsored by <a id="footer-sponsor" href="http://www.albtechrva.com/">www.albtechrva.com</a></p>';
 
   return $creds;
 }
+
 
 
 // add_action( 'wp_footer', 'jroc_svg_blur_filter' );

@@ -83,17 +83,31 @@ Site Footer
   font-size: 16px;
   padding: 60px 0;
   text-align: center;
-}
-
-.site-footer,
-.site-footer a {
   color: #fff;
-}
 
-.site-footer a:hover {
-  color: #22a3d9;
-}
+  a {
+    color: #fff;
 
-.site-footer p {
-  margin-bottom: 0;
+    &:hover {
+      color: #22a3d9;
+    }
+
+    &#footer-sponsor {
+      border: 0;
+      font: 0/0 a;
+      text-shadow: none;
+      color: transparent;
+      background-image: image-url( 'albtechsquare3.jpg' );
+      background-position: center;
+      background-size: contain;
+      width:85px;
+      height:84px;
+      display:block;
+      margin: 0 auto;
+    }
+  }
+
+  p {
+    margin-bottom: 0;
+  }
 }

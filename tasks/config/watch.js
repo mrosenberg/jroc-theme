@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     },
 
     php: {
-      files: ['**/**/theme/*.php'],
+      files: ['**/**/theme/**/*.php'],
       tasks: ['copy:dev'],
       options: {
         livereload: true
