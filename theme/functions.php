@@ -5,6 +5,9 @@ include_once( get_template_directory() . '/lib/init.php' );
 //* Setup Theme
 include_once( get_stylesheet_directory() . '/lib/theme-defaults.php' );
 
+//* Setup Theme
+include_once( get_stylesheet_directory() . '/lib/user-profile-widget.php' );
+
 //* Set Localization (do not remove)
 load_child_theme_textdomain( 'jroc', apply_filters( 'child_theme_textdomain', get_stylesheet_directory() . '/languages', 'jroc' ) );
 
@@ -63,6 +66,7 @@ function jroc_customize_register( $wp_customize ) {
 unregister_sidebar( 'sidebar' );
 unregister_sidebar( 'sidebar-alt' );
 
+
 //* Unregister the header right widget area
 unregister_sidebar( 'header-right' );
 
@@ -95,6 +99,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <?php
   echo "\r\n";
+
 }
 
 //* Reposition the primary navigation menu
@@ -168,6 +173,13 @@ genesis_register_sidebar( array(
 	'id'          => 'home-social',
 	'name'        => __( 'Home Social', 'jroc' ),
 	'description' => __( 'This is the home social section.', 'jroc' ),
+) );
+genesis_register_sidebar( array(
+  'id'          => 'board-member-profiles',
+  'name'        => __( 'Board Members', 'jroc' ),
+  'description' => __( 'Member Profiles', 'jroc' ),
+  'before_title'  => '<p class="widget-title widgettitle">',
+  'after_title'   => "</p>\n",
 ) );
 
 
@@ -334,16 +346,39 @@ function jroc_footer_creds_text( $creds ) {
 
 
 
-// add_action( 'wp_footer', 'jroc_svg_blur_filter' );
-function jroc_svg_blur_filter() {
+add_action( 'after_switch_theme', 'jroc_theme_setup' );
+function jroc_theme_setup() {
 
-  echo '<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="0">
-    <defs>
-      <filter id="blur">
-        <feGaussianBlur stdDeviation="5" />
-      </filter>
-    </defs>
-  </svg>';
+  $capabilities = array(
+    'switch_themes' => false,
+    'activate_plugins' => false,
+    'edit_plugins' => false,
+    'install_plugins' => false,
+    'edit_users' => false,
+    'edit_files' => false,
+    'manage_options' => false,
+    'moderate_comments' => true,
+    'manage_categories' => true,
+    'upload_files' => true,
+    'unfiltered_html' => false,
+    'edit_posts' => true,
+    'edit_others_posts' => true,
+    'edit_published_posts' => true,
+    'publish_posts' => true,
+    'edit_posts' => true,
+    'edit_pages' => true,
+    'read' => true
+  );
 
+  add_role( 'board_member', __( 'Board Member' ), $capabilities );
 }
 
+
+add_action( 'admin_menu', 'jroc_cfs_disable_admin' );
+function jroc_cfs_disable_admin() {
+
+  if( !current_user_can( 'manage_options' ) ) {
+    remove_menu_page( 'edit.php?post_type=cfs' );
+    remove_menu_page( 'tools.php' );
+  }
+}
