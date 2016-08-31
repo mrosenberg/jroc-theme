@@ -1,8 +1,6 @@
 <?php
-/**
- * Template Name: Board Members
- *
- * @package JROC
+/*
+ Template Name: Board Members
  */
 
 

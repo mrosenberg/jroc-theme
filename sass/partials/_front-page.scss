@@ -79,19 +79,19 @@
   width: 36px;
 }
 
-.home-features .one-third {
-  margin: 0;
-  padding-left: 20px;
-  padding-right: 20px;
-  width: 33.33%;
+.home-features .widget {
+  width: 48.717948717948715%;
+  float: left;
+  margin-left: 2.564102564102564%;
 }
 
 .home-features p {
   font-size: 20px;
 }
 
-.home-features p:last-child {
+.home-features section:last-child {
   margin-bottom: 0;
+  margin-left: 0;
 }
 
 .home-features a.button {

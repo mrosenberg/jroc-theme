@@ -5,8 +5,17 @@ include_once( get_template_directory() . '/lib/init.php' );
 //* Setup Theme
 include_once( get_stylesheet_directory() . '/lib/theme-defaults.php' );
 
-//* Setup Theme
+//* Profile Widget
 include_once( get_stylesheet_directory() . '/lib/user-profile-widget.php' );
+
+//* River Level Widget
+include_once( get_stylesheet_directory() . '/lib/river-level-widget.php' );
+
+//* RVA Weather Widget
+include_once( get_stylesheet_directory() . '/lib/weather-conditions-widget.php' );
+
+//* Login Form
+include_once( get_stylesheet_directory() . '/lib/login-form.php' );
 
 //* Set Localization (do not remove)
 load_child_theme_textdomain( 'jroc', apply_filters( 'child_theme_textdomain', get_stylesheet_directory() . '/languages', 'jroc' ) );
@@ -29,15 +38,12 @@ function jroc_enqueue_styles() {
 
 	wp_enqueue_script( 'jroc-responsive-menu', get_bloginfo( 'stylesheet_directory' ) . '/js/responsive-menu.js', array( 'jquery' ), '1.0.0' );
 
-  // wp_enqueue_script( 'jroc-high-charts', get_bloginfo( 'stylesheet_directory' ) . '/js/high-charts.js', array(  ), '1.0.0', true );
 
   wp_enqueue_script( 'jroc-darksky', get_bloginfo( 'stylesheet_directory' ) . '/js/darksky.js', array( 'jquery' ), '1.0.0' );
 
   wp_enqueue_script( 'jroc-modernizr', get_bloginfo( 'stylesheet_directory' ) . '/js/modernizr.js', array(), '3.3.1' );
 
 	wp_enqueue_style( 'dashicons' );
-	// wp_enqueue_style( 'google-fonts', '//fonts.googleapis.com/css?family=Montserrat:400,700|Neuton:300,700', array(), CHILD_THEME_VERSION );
-
 }
 
 //* Add HTML5 markup structure
@@ -193,140 +199,140 @@ function jroc_site_title_logo( $title, $inside, $wrap ) {
 }
 
 
-add_action( 'genesis_header', 'jroc_weather_info' );
-function jroc_weather_info() {
+// add_action( 'genesis_header', 'jroc_weather_info' );
+// function jroc_weather_info() {
 
-  if( !is_front_page() ) return;
+//   if( !is_front_page() ) return;
 
-  $transient = 'darksky-forecast';
+//   $transient = 'darksky-forecast';
 
-  $url = sprintf( 'https://api.forecast.io/forecast/%s/%s,%s,%s', '0ee3b4a4c6b52530fa0cb0cfa0bee9ea', 37.528452, -77.456574, time() );
+//   $url = sprintf( 'https://api.forecast.io/forecast/%s/%s,%s,%s', '0ee3b4a4c6b52530fa0cb0cfa0bee9ea', 37.528452, -77.456574, time() );
 
-  // Check if our data has been cached
-  if ( false === ( $forecast = get_transient( $transient ) ) ) {
+//   // Check if our data has been cached
+//   if ( false === ( $forecast = get_transient( $transient ) ) ) {
 
-    // It wasn't there, so regenerate the data and save the transient
-    $forecast = jroc_dark_sky_request( $url );
+//     // It wasn't there, so regenerate the data and save the transient
+//     $forecast = jroc_dark_sky_request( $url );
 
-    // Let's now save the new data
-    set_transient( $transient, $forecast, 60 * 15 );
-  }
+//     // Let's now save the new data
+//     set_transient( $transient, $forecast, 60 * 15 );
+//   }
 
-  $icon        = $forecast['currently']['icon'];
-  $temp        = $forecast['currently']['temperature'];
-  $windSpeed   = $forecast['currently']['windSpeed'];
-  $windBearing = $forecast['currently']['windBearing'];
-  $visibility  = $forecast['currently']['visibility'];
-  $pressure    = $forecast['currently']['pressure'];
+//   $icon        = $forecast['currently']['icon'];
+//   $temp        = $forecast['currently']['temperature'];
+//   $windSpeed   = $forecast['currently']['windSpeed'];
+//   $windBearing = $forecast['currently']['windBearing'];
+//   $visibility  = $forecast['currently']['visibility'];
+//   $pressure    = $forecast['currently']['pressure'];
 
-  $html  = '<div class="weather-area">';
+//   $html  = '<div class="weather-area">';
 
-  $html .= '<p>Weather Conditions</p>';
+//   $html .= '<p>Weather Conditions</p>';
 
-  $html .= "<canvas class='dark-sky-metric dark-sky-icon' data-icon='{$icon}' width='128' height='128'></canvas>";
+//   $html .= "<canvas class='dark-sky-metric dark-sky-icon' data-icon='{$icon}' width='128' height='128'></canvas>";
 
-  $html .= "<span class='dark-sky-metric dark-sky-temp'><i class='wi wi-thermometer-exterior
-'></i> {$temp}&#176;F</span>";
+//   $html .= "<span class='dark-sky-metric dark-sky-temp'><i class='wi wi-thermometer-exterior
+// '></i> {$temp}&#176;F</span>";
 
-  $html .= "<span class='dark-sky-metric dark-sky-windspeed'><i class='wi wi-windy'></i> {$windSpeed} <span class='dark-sky-suffix'>mph</span></span>";
+//   $html .= "<span class='dark-sky-metric dark-sky-windspeed'><i class='wi wi-windy'></i> {$windSpeed} <span class='dark-sky-suffix'>mph</span></span>";
 
-  $html .= '</div>';
+//   $html .= '</div>';
 
-  echo $html;
-}
-
-
-add_action( 'genesis_header', 'jroc_river_info' );
-function jroc_river_info() {
-
-  if( !is_front_page() ) return;
+//   echo $html;
+// }
 
 
-  $transient = 'westham-level';
+// add_action( 'genesis_header', 'jroc_river_info' );
+// function jroc_river_info() {
 
-  $url = 'http://waterservices.usgs.gov/nwis/iv/?format=json&sites=02037500';
-
-  // Check if our data has been cached
-  if ( false === ( $level = get_transient( $transient ) ) ) {
-
-    // It wasn't there, so regenerate the data and save the transient
-    $level = jroc_usgs_request( $url );
-
-    // Let's now save the new data
-    set_transient( $transient, $level, 60 * 15 );
-  }
-
-  $feet_second = number_format( $level['value']['timeSeries'][0]['values'][0]['value'][0]['value'] );
-  $height      = $level['value']['timeSeries'][1]['values'][0]['value'][0]['value'];
-
-  $html  = '<div class="river-area">';
-  $html .= '<p>River Level</p>';
-  $html .= "<span class='river-metric ft-per-second'>{$feet_second} ft&#179;/s</span>";
-  $html .= "<span class='river-metric height'>{$height} ft</span>";
-  $html .= '</div>';
-
-  echo $html;
-}
+//   if( !is_front_page() ) return;
 
 
-function jroc_usgs_request( $url ) {
+//   $transient = 'westham-level';
 
-  $response = wp_remote_get( $url );
+//   $url = 'http://waterservices.usgs.gov/nwis/iv/?format=json&sites=02037500';
 
-  if ($response === false) {
-      throw new \Exception('There was an error contacting the DarkSky API.');
-  }
+//   // Check if our data has been cached
+//   if ( false === ( $level = get_transient( $transient ) ) ) {
 
-  $json = json_decode($response['body'], true);
+//     // It wasn't there, so regenerate the data and save the transient
+//     $level = jroc_usgs_request( $url );
 
-  if ($json === null) {
-    switch($error_code = json_last_error()) {
-      case JSON_ERROR_SYNTAX:
-          $reason = 'Bad JSON Syntax';
-          break;
-      case JSON_ERROR_CTRL_CHAR:
-          $reason = 'Unexpected control character found';
-          break;
-      default:
-          $reason = sprintf('Unknown error. Error code %s', $error_code);
-          break;
-    }
+//     // Let's now save the new data
+//     set_transient( $transient, $level, 60 * 15 );
+//   }
 
-    throw new \Exception(sprintf('Unable to decode JSON response: %s', $reason));
-  }
+//   $feet_second = number_format( $level['value']['timeSeries'][0]['values'][0]['value'][0]['value'] );
+//   $height      = $level['value']['timeSeries'][1]['values'][0]['value'][0]['value'];
 
-  return $json;
-}
+//   $html  = '<div class="river-area">';
+//   $html .= '<p>River Level</p>';
+//   $html .= "<span class='river-metric ft-per-second'>{$feet_second} ft&#179;/s</span>";
+//   $html .= "<span class='river-metric height'>{$height} ft</span>";
+//   $html .= '</div>';
+
+//   echo $html;
+// }
 
 
-function jroc_dark_sky_request( $url ) {
+// function jroc_usgs_request( $url ) {
 
-  $response = wp_remote_get( $url );
+//   $response = wp_remote_get( $url );
 
-  if ($response === false) {
-      throw new \Exception('There was an error contacting the DarkSky API.');
-  }
+//   if ($response === false) {
+//       throw new \Exception('There was an error contacting the DarkSky API.');
+//   }
 
-  $json = json_decode($response['body'], true);
+//   $json = json_decode($response['body'], true);
 
-  if ($json === null) {
-    switch($error_code = json_last_error()) {
-      case JSON_ERROR_SYNTAX:
-          $reason = 'Bad JSON Syntax';
-          break;
-      case JSON_ERROR_CTRL_CHAR:
-          $reason = 'Unexpected control character found';
-          break;
-      default:
-          $reason = sprintf('Unknown error. Error code %s', $error_code);
-          break;
-    }
+//   if ($json === null) {
+//     switch($error_code = json_last_error()) {
+//       case JSON_ERROR_SYNTAX:
+//           $reason = 'Bad JSON Syntax';
+//           break;
+//       case JSON_ERROR_CTRL_CHAR:
+//           $reason = 'Unexpected control character found';
+//           break;
+//       default:
+//           $reason = sprintf('Unknown error. Error code %s', $error_code);
+//           break;
+//     }
 
-    throw new \Exception(sprintf('Unable to decode JSON response: %s', $reason));
-  }
+//     throw new \Exception(sprintf('Unable to decode JSON response: %s', $reason));
+//   }
 
-  return $json;
-}
+//   return $json;
+// }
+
+
+// function jroc_dark_sky_request( $url ) {
+
+//   $response = wp_remote_get( $url );
+
+//   if ($response === false) {
+//       throw new \Exception('There was an error contacting the DarkSky API.');
+//   }
+
+//   $json = json_decode($response['body'], true);
+
+//   if ($json === null) {
+//     switch($error_code = json_last_error()) {
+//       case JSON_ERROR_SYNTAX:
+//           $reason = 'Bad JSON Syntax';
+//           break;
+//       case JSON_ERROR_CTRL_CHAR:
+//           $reason = 'Unexpected control character found';
+//           break;
+//       default:
+//           $reason = sprintf('Unknown error. Error code %s', $error_code);
+//           break;
+//     }
+
+//     throw new \Exception(sprintf('Unable to decode JSON response: %s', $reason));
+//   }
+
+//   return $json;
+// }
 
 
 add_filter( 'genesis_footer_creds_text', 'jroc_footer_creds_text' );

@@ -1,4 +1,4 @@
-/**
+/*!
   Theme Name: James River Outdoor Coalition
   Theme URI: http://my.studiopress.com/themes/jroc/
   Description: With an emphasis on incredible typography and responsive design, this HTML5 theme will leave your audience nothing short of speechless.
@@ -30,6 +30,8 @@
 @import 'partials/wordpress';
 @import 'partials/widgets';
 @import 'partials/widget-user-profile';
+@import 'partials/widget-river-level';
+@import 'partials/widget-weather-conditions';
 @import 'partials/enews-extended';
 @import 'partials/featured-content';
 @import 'partials/gravity-forms';
