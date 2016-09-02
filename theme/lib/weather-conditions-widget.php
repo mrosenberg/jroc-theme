@@ -77,7 +77,7 @@ class RVA_Weather_Conditions extends WP_Widget {
     $html .= $title;
     $html .= $args['after_title'];
 
-    $html .= '<div class="one-half">';
+    $html .= '<div class="one-half first">';
     $html .= "<canvas class='dark-sky-metric dark-sky-icon' data-icon='{$icon}' width='128' height='128'></canvas>";
     $html .= '</div>';
     $html .= '<div class="one-half">';

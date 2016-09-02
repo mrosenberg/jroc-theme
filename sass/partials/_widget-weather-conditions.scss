@@ -1,3 +1,13 @@
 .widget.rva-weather-conditions {
 
+  .widget-wrap {
+
+    .one-half {
+
+      canvas {
+        position: relative;
+        @include transform3d( translate( 30px, -30px ) );
+      }
+    }
+  }
 }

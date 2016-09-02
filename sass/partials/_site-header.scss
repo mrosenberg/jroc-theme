@@ -12,10 +12,15 @@ Site Header
   }
 
   .title-area {
+    width:100%;
+    float:left;
     @include breakpoint( $brook ) {
-      width:33%;
-      float:left;
+      width: 10%;
+      text-align: left;
+      margin-left: 5rem;
+      float:none;
     }
+
 
     .site-description,
     .site-title {
@@ -26,11 +31,14 @@ Site Header
     }
 
     .site-title {
+      width:40%;
+      float:left;
+      @include breakpoint( $brook ) {
+        width:100%;
+        float:none;
+      }
 
       a {
-        width:50%;
-        display: block;
-        margin: 0 auto;
 
         svg {
           width:100%;
@@ -45,39 +53,15 @@ Site Header
       font-size: 14px;
       font-weight: 400;
       letter-spacing: 3px;
-    }
-  }
-
-
-  .weather-area {
-    color:#ccc;
-    margin-top:1.5rem;
-    @include breakpoint( $brook ) {
-      width:33%;
-      float:left;
-
-      canvas {
-        float:left;
-        margin:-1.5rem -3rem 0 3rem;
+      text-align: center;
+      width:40%;
+      float:right;
+      padding-top:3.5rem;
+      @include breakpoint( $brook ) {
+        width: 100%;
+        float:none;
+        padding:0;
       }
-    }
-
-    span.dark-sky-metric {
-      display: block;
-    }
-  }
-
-
-  .river-area {
-    color:#ccc;
-    margin-top:1.5rem;
-    @include breakpoint( $brook ) {
-      width:33%;
-      float:left;
-    }
-
-    span.river-metric {
-      display: block;
     }
   }
 }
