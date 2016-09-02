@@ -60,24 +60,8 @@ body.home {
   }
 
   a.button {
-    background-color: transparent;
-    border: 1px solid #fff;
-    clear: both;
-    color: #fff;
     display: block;
-    font-family: Montserrat, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    margin-top: 20px;
-    padding: 20px 40px;
-    text-transform: uppercase;
-    width: auto;
-
-    &:hover {
-      background-color: #22a3d9;
-      border: 1px solid #22a3d9;
-    }
+    text-align: center;
   }
 }
 
@@ -114,9 +98,11 @@ body.home {
 }
 
 .home-features .widget {
-  width: 48.717948717948715%;
-  float: left;
-  margin-left: 2.564102564102564%;
+  @include breakpoint( $brook ) {
+    width: 48.717948717948715%;
+    float: left;
+    margin-left: 2.564102564102564%;
+  }
 }
 
 .home-features p {

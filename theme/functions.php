@@ -199,140 +199,6 @@ function jroc_site_title_logo( $title, $inside, $wrap ) {
 }
 
 
-// add_action( 'genesis_header', 'jroc_weather_info' );
-// function jroc_weather_info() {
-
-//   if( !is_front_page() ) return;
-
-//   $transient = 'darksky-forecast';
-
-//   $url = sprintf( 'https://api.forecast.io/forecast/%s/%s,%s,%s', '0ee3b4a4c6b52530fa0cb0cfa0bee9ea', 37.528452, -77.456574, time() );
-
-//   // Check if our data has been cached
-//   if ( false === ( $forecast = get_transient( $transient ) ) ) {
-
-//     // It wasn't there, so regenerate the data and save the transient
-//     $forecast = jroc_dark_sky_request( $url );
-
-//     // Let's now save the new data
-//     set_transient( $transient, $forecast, 60 * 15 );
-//   }
-
-//   $icon        = $forecast['currently']['icon'];
-//   $temp        = $forecast['currently']['temperature'];
-//   $windSpeed   = $forecast['currently']['windSpeed'];
-//   $windBearing = $forecast['currently']['windBearing'];
-//   $visibility  = $forecast['currently']['visibility'];
-//   $pressure    = $forecast['currently']['pressure'];
-
-//   $html  = '<div class="weather-area">';
-
-//   $html .= '<p>Weather Conditions</p>';
-
-//   $html .= "<canvas class='dark-sky-metric dark-sky-icon' data-icon='{$icon}' width='128' height='128'></canvas>";
-
-//   $html .= "<span class='dark-sky-metric dark-sky-temp'><i class='wi wi-thermometer-exterior
-// '></i> {$temp}&#176;F</span>";
-
-//   $html .= "<span class='dark-sky-metric dark-sky-windspeed'><i class='wi wi-windy'></i> {$windSpeed} <span class='dark-sky-suffix'>mph</span></span>";
-
-//   $html .= '</div>';
-
-//   echo $html;
-// }
-
-
-// add_action( 'genesis_header', 'jroc_river_info' );
-// function jroc_river_info() {
-
-//   if( !is_front_page() ) return;
-
-
-//   $transient = 'westham-level';
-
-//   $url = 'http://waterservices.usgs.gov/nwis/iv/?format=json&sites=02037500';
-
-//   // Check if our data has been cached
-//   if ( false === ( $level = get_transient( $transient ) ) ) {
-
-//     // It wasn't there, so regenerate the data and save the transient
-//     $level = jroc_usgs_request( $url );
-
-//     // Let's now save the new data
-//     set_transient( $transient, $level, 60 * 15 );
-//   }
-
-//   $feet_second = number_format( $level['value']['timeSeries'][0]['values'][0]['value'][0]['value'] );
-//   $height      = $level['value']['timeSeries'][1]['values'][0]['value'][0]['value'];
-
-//   $html  = '<div class="river-area">';
-//   $html .= '<p>River Level</p>';
-//   $html .= "<span class='river-metric ft-per-second'>{$feet_second} ft&#179;/s</span>";
-//   $html .= "<span class='river-metric height'>{$height} ft</span>";
-//   $html .= '</div>';
-
-//   echo $html;
-// }
-
-
-// function jroc_usgs_request( $url ) {
-
-//   $response = wp_remote_get( $url );
-
-//   if ($response === false) {
-//       throw new \Exception('There was an error contacting the DarkSky API.');
-//   }
-
-//   $json = json_decode($response['body'], true);
-
-//   if ($json === null) {
-//     switch($error_code = json_last_error()) {
-//       case JSON_ERROR_SYNTAX:
-//           $reason = 'Bad JSON Syntax';
-//           break;
-//       case JSON_ERROR_CTRL_CHAR:
-//           $reason = 'Unexpected control character found';
-//           break;
-//       default:
-//           $reason = sprintf('Unknown error. Error code %s', $error_code);
-//           break;
-//     }
-
-//     throw new \Exception(sprintf('Unable to decode JSON response: %s', $reason));
-//   }
-
-//   return $json;
-// }
-
-
-// function jroc_dark_sky_request( $url ) {
-
-//   $response = wp_remote_get( $url );
-
-//   if ($response === false) {
-//       throw new \Exception('There was an error contacting the DarkSky API.');
-//   }
-
-//   $json = json_decode($response['body'], true);
-
-//   if ($json === null) {
-//     switch($error_code = json_last_error()) {
-//       case JSON_ERROR_SYNTAX:
-//           $reason = 'Bad JSON Syntax';
-//           break;
-//       case JSON_ERROR_CTRL_CHAR:
-//           $reason = 'Unexpected control character found';
-//           break;
-//       default:
-//           $reason = sprintf('Unknown error. Error code %s', $error_code);
-//           break;
-//     }
-
-//     throw new \Exception(sprintf('Unable to decode JSON response: %s', $reason));
-//   }
-
-//   return $json;
-// }
 
 
 add_filter( 'genesis_footer_creds_text', 'jroc_footer_creds_text' );
@@ -341,11 +207,20 @@ function jroc_footer_creds_text( $creds ) {
   $url  = get_bloginfo( 'url' );
   $name = get_bloginfo( 'name' );
 
-  $creds  = '<p>[footer_copyright] &middot ';
-  $creds .= sprintf( '<a href="%s">%s</a> &middot 501(c)(3)</p>', $url, $name );
-  $creds .= '<p>JROC c/o James River Park P.O. Box 297 Richmond, Va. 23219</p>';
-  $creds .= '<a href="contact-us">Contact JROC</a> &middot [footer_loginout]';
-  $creds .= '<p>Website hosting sponsored by <a id="footer-sponsor" href="http://www.albtechrva.com/">www.albtechrva.com</a></p>';
+  if ( ! is_user_logged_in() )
+    $link = '<a class="button" href="' . esc_url( wp_login_url() ) . '">' . __( 'Member log in' ) . '</a>';
+  else
+    $link = '<a class="button" href="' . esc_url( wp_logout_url() ) . '">' . __( 'Log out', 'genesis' ) . '</a>';
+
+
+  $creds  = '<p>Website hosting sponsored by <a id="footer-sponsor" href="http://www.albtechrva.com/">www.albtechrva.com</a></p>';
+  $creds .= '<a class="button" href="contact-us">Contact JROC</a>';
+  $creds .= $link;
+  $creds .= sprintf(
+    '<p><small>[footer_copyright] &middot <a href="%s">%s</a> &middot 501(c)(3) JROC c/o James River Park P.O. Box 297 Richmond, Va. 23219</small></p>',
+    $url,
+    $name
+  );
 
   return $creds;
 }
