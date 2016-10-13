@@ -110,7 +110,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 //* Reposition the primary navigation menu
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
-add_action( 'genesis_header', 'genesis_do_nav', 5 );
+add_action( 'genesis_header', 'genesis_do_nav' );
 
 //* Reduce the primary navigation menu to one level depth
 add_filter( 'jroc_primary_menu_args', 'jroc_primary_menu_args' );
@@ -189,7 +189,7 @@ genesis_register_sidebar( array(
 ) );
 
 
-add_filter( 'genesis_seo_title', 'jroc_site_title_logo' ,10, 3 );
+add_filter( 'genesis_seo_title', 'jroc_site_title_logo', 10, 3 );
 function jroc_site_title_logo( $title, $inside, $wrap ) {
 
   $link = get_bloginfo( 'url' );
@@ -217,7 +217,7 @@ function jroc_footer_creds_text( $creds ) {
   $creds .= '<a class="button" href="contact-us">Contact JROC</a>';
   $creds .= $link;
   $creds .= sprintf(
-    '<p><small>[footer_copyright] &middot <a href="%s">%s</a> &middot 501(c)(3) JROC c/o James River Park P.O. Box 297 Richmond, Va. 23219</small></p>',
+    '<p id="org-info"><small>[footer_copyright] &middot <a href="%s">%s</a> &middot 501(c)(3) JROC c/o James River Park P.O. Box 297 Richmond, Va. 23219</small></p>',
     $url,
     $name
   );

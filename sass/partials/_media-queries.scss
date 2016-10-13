@@ -62,10 +62,6 @@ $screen-md-max:              ($screen-lg-min - 1) !default;
 
 @media only screen and (max-width: 960px) {
 
-  .home-intro {
-    padding-top: 90px;
-  }
-
   .footer-widgets-1,
   .footer-widgets-2,
   .footer-widgets-3 {
@@ -130,8 +126,12 @@ $screen-md-max:              ($screen-lg-min - 1) !default;
     display: block;
   }
 
+  .genesis-nav-menu.responsive-menu {
+    background: rgba( 255, 255, 255, 0.8 );
+  }
+
   .genesis-nav-menu.responsive-menu .menu-item {
-    text-align: left;
+    text-align: right;
   }
 
   .genesis-nav-menu.responsive-menu .menu-item:hover {

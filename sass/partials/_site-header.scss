@@ -3,40 +3,21 @@ Site Header
 ---------------------------------------------------------------------------------------------------- */
 
 .site-header {
-  background-color: #333;
-  padding-bottom: 1rem;
-  text-align: center;
-
-  p {
-    margin:0 0 1rem 0;
-  }
+  background-color: #6e9f3b;
+  height: 50px;
+  position: fixed;
+  top:0;
+  width: 100%;
 
   .title-area {
-    width:100%;
-    float:left;
-    @include breakpoint( $brook ) {
-      width: 10%;
-      text-align: left;
-      margin-left: 5rem;
-      float:none;
-    }
 
 
-    .site-description,
-    .site-title {
-      font-family: Montserrat, sans-serif;
-      line-height: 1;
-      margin-bottom: 0;
-      text-transform: uppercase;
-    }
 
     .site-title {
-      width:40%;
-      float:left;
-      @include breakpoint( $brook ) {
-        width:100%;
-        float:none;
-      }
+      position: absolute;
+      top: -10px;
+      left: 1rem;
+      width: 20%;
 
       a {
 
@@ -49,19 +30,15 @@ Site Header
     }
 
     .site-description {
-      color: #ccc;
+      color: #fff;
       font-size: 14px;
       font-weight: 400;
       letter-spacing: 3px;
-      text-align: center;
+      text-align: right;
       width:40%;
       float:right;
-      padding-top:3.5rem;
-      @include breakpoint( $brook ) {
-        width: 100%;
-        float:none;
-        padding:0;
-      }
+      padding:0.5rem;
+      margin:0;
     }
   }
 }

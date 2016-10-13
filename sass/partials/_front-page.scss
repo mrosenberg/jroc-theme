@@ -4,20 +4,36 @@
 body.home {
 
   header.site-header {
-    @include breakpoint( $brook ) {
-      position: absolute;
-      top: 0;
-      left:0;
-      width:100%;
-      z-index:2;
-      background:none;
+    position: absolute;
+    top: 0;
+    left:0;
+    width:100%;
+    z-index:2;
+    background:none;
+
+
+    .site-title {
+      width: 35%;
+      @include breakpoint( $brook ) {
+        width: 20%;
+      }
     }
 
-    .title-area {
-      @include breakpoint( $brook ) {
-        width:20%;
-        float:right;
-        margin-right:5rem;
+    nav.nav-primary {
+
+      ul#menu-main {
+        background-color: transparent;
+
+        &.responsive-menu {
+          background: rgba( 0, 0, 0, 0.6);
+        }
+
+        li {
+
+          a {
+            color:#fff;
+          }
+        }
       }
     }
   }
@@ -29,6 +45,11 @@ body.home {
       top:32px;
     }
   }
+
+
+  .site-inner {
+    padding-top:0;
+  }
 }
 
 
@@ -38,30 +59,32 @@ body.home {
 
 .home-intro {
   color: #fff;
-  height: 540px;
+  height: 100vh;
   overflow: hidden;
-  padding-top: 180px;
 
-  .one-half.first {
-    padding-right: 40px;
-  }
+  .wrap {
+    margin-top:20vh;
+    @include breakpoint( $brook ) {
+      margin-top:35vh;
+    }
 
-  .widget_text {
-    background: rgba(0,0,0,0.6);
-    padding:2rem;
-  }
+    .widget_text {
+      background: rgba(0,0,0,0.6);
+      padding:2rem;
+    }
 
-  h4 {
-    color: #fff;
-    font-size: 30px;
-    letter-spacing: 3px;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-  }
+    h4 {
+      color: #fff;
+      font-size: 30px;
+      letter-spacing: 3px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
 
-  a.button {
-    display: block;
-    text-align: center;
+    a.button {
+      display: block;
+      text-align: center;
+    }
   }
 }
 
@@ -145,6 +168,16 @@ body.home {
   padding-bottom: 120px;
   padding-top: 120px;
   text-align: center;
+
+  .widget_mc4wp_form_widget {
+
+    .mc4wp-form-fields {
+
+      label {
+        visibility: hidden;
+      }
+    }
+  }
 }
 
 .home-social .dashicons {
