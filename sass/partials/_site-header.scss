@@ -15,14 +15,14 @@ Site Header
     .title-area {
 
       .site-title {
-        @include breakpoint( $creek ) {
-          width: 11%;
+        @include breakpoint( $brook ) {
+          width: 18%;
         }
         @include breakpoint( $stream ) {
           width: 15%;
         }
-        @include breakpoint( $brook ) {
-          width: 18%;
+        @include breakpoint( $creek ) {
+          width: 11%;
         }
       }
     }
