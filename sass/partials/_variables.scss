@@ -9,10 +9,10 @@
 // Max Width
 $max-container-width: 70rem;
 
-$river: $max-container-width;
-$creek: 65rem;
-$stream: 55rem;
-$brook: 40rem;
-$small: max-width $brook;
-$large: min-width $brook;
-$hidpi: min-resolution 1.5dppx;
+$river:  $max-container-width;
+$creek:  60rem;
+$stream: 40rem;
+$brook:  20rem;
+$small:  max-width $brook;
+$large:  min-width $brook;
+$hidpi:  min-resolution 1.5dppx;

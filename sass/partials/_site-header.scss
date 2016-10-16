@@ -8,16 +8,34 @@ Site Header
   position: fixed;
   top:0;
   width: 100%;
+  z-index:1;
+
+  &.scrolled {
+
+    .title-area {
+
+      .site-title {
+        @include breakpoint( $creek ) {
+          width: 11%;
+        }
+        @include breakpoint( $stream ) {
+          width: 15%;
+        }
+        @include breakpoint( $brook ) {
+          width: 18%;
+        }
+      }
+    }
+  }
 
   .title-area {
 
-
-
     .site-title {
       position: absolute;
-      top: -10px;
+      top: -15px;
       left: 1rem;
       width: 20%;
+      @include transition( width 300ms ease );
 
       a {
 
@@ -40,5 +58,13 @@ Site Header
       padding:0.5rem;
       margin:0;
     }
+  }
+}
+
+
+body.admin-bar {
+
+  header.site-header {
+    top:32px;
   }
 }

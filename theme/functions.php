@@ -38,10 +38,9 @@ function jroc_enqueue_styles() {
 
 	wp_enqueue_script( 'jroc-responsive-menu', get_bloginfo( 'stylesheet_directory' ) . '/js/responsive-menu.js', array( 'jquery' ), '1.0.0' );
 
-
   wp_enqueue_script( 'jroc-darksky', get_bloginfo( 'stylesheet_directory' ) . '/js/darksky.js', array( 'jquery' ), '1.0.0' );
 
-  wp_enqueue_script( 'jroc-modernizr', get_bloginfo( 'stylesheet_directory' ) . '/js/modernizr.js', array(), '3.3.1' );
+  wp_enqueue_script( 'jroc-header-scroll', get_bloginfo( 'stylesheet_directory' ) . '/js/header-scroll.js', array( 'jquery' ), '1.0.0' );
 
 	wp_enqueue_style( 'dashicons' );
 }
@@ -90,6 +89,8 @@ add_theme_support( 'genesis-menus' , array( 'primary' => __( 'Before Header Menu
 
 add_action( 'genesis_before', 'jroc_gtm_container' );
 function jroc_gtm_container() {
+
+  if( WP_DEBUG ) return;
 
   echo "\r\n";
 ?>

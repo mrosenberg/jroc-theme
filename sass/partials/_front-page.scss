@@ -4,45 +4,38 @@
 body.home {
 
   header.site-header {
-    position: absolute;
-    top: 0;
-    left:0;
-    width:100%;
-    z-index:2;
-    background:none;
-
-
-    .site-title {
-      width: 35%;
-      @include breakpoint( $brook ) {
-        width: 20%;
-      }
-    }
+    background-color: transparent;
 
     nav.nav-primary {
 
-      ul#menu-main {
+      ul {
         background-color: transparent;
-
-        &.responsive-menu {
-          background: rgba( 0, 0, 0, 0.6);
-        }
 
         li {
 
           a {
-            color:#fff;
+            color: #fff;
           }
         }
       }
     }
-  }
 
+    &.scrolled {
+      background-color: #6e9f3b;
 
-  &.admin-bar {
+      nav.nav-primary {
 
-    header.site-header {
-      top:32px;
+        ul {
+          background-color: #fff;
+
+          li {
+
+            a {
+              color: #333;
+            }
+          }
+        }
+      }
     }
   }
 
@@ -171,10 +164,45 @@ body.home {
 
   .widget_mc4wp_form_widget {
 
+
     .mc4wp-form-fields {
 
-      label {
-        visibility: hidden;
+
+      p {
+        margin: 1rem auto;
+        padding:1rem 0;
+        clear:both;
+        @include breakpoint( $creek ) {
+          width: 80%;
+        }
+        @include breakpoint( $river ) {
+          width: 60%;
+        }
+
+        label {
+          display: block;
+          visibility: hidden;
+        }
+
+        input[type="email"] {
+          @include breakpoint( $creek ) {
+            width:70%;
+            float:left;
+          }
+
+        }
+
+        input[type="submit"] {
+          margin:1rem auto;
+          border: 1px solid #000;
+          color:#000;
+          clear:none;
+          font-size:20px;
+          @include breakpoint( $creek ) {
+            margin:0;
+            float:right;
+          }
+        }
       }
     }
   }

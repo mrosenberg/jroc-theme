@@ -6,7 +6,9 @@
 
       canvas {
         position: relative;
-        @include transform3d( translate( 30px, -30px ) );
+        @include breakpoint ( $creek) {
+          @include transform3d( translate( 30px, -30px ) );
+        }
       }
     }
   }
