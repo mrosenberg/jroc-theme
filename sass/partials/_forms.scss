@@ -58,6 +58,10 @@ input[type="submit"],
   text-transform: uppercase;
   width: auto;
 
+  &.btn-secondary {
+    background-color: #6e9f3b;
+  }
+
   button:hover,
   input:hover[type="button"],
   input:hover[type="reset"],

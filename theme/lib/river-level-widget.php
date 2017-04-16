@@ -71,7 +71,8 @@ class JROC_River_Level extends WP_Widget {
     $html  = $args['before_widget'];
     $html .= $args['before_title'];
     $html .= $title;
-    $html .= $args['after_title'];    $html .= "<p class='river-metric ft-per-second'>{$feet_second} ft&#179;/s</p>";
+    $html .= $args['after_title'];
+    $html .= "<p class='river-metric ft-per-second'>{$feet_second} ft&#179;/s</p>";
     $html .= "<p class='river-metric height'>{$height} ft</p>";
     $html .= $args['after_widget'];
 
@@ -106,7 +107,8 @@ class JROC_River_Level extends WP_Widget {
     $instance = array();
     $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
 
-    return $instance;  }
+    return $instance;
+  }
 }
 
 add_action( 'widgets_init', function(){

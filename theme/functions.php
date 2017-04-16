@@ -14,6 +14,10 @@ include_once( get_stylesheet_directory() . '/lib/river-level-widget.php' );
 //* RVA Weather Widget
 include_once( get_stylesheet_directory() . '/lib/weather-conditions-widget.php' );
 
+//* Fundarising Widget
+include_once( get_stylesheet_directory() . '/lib/fundraising-progress-widget.php' );
+
+
 //* Login Form
 include_once( get_stylesheet_directory() . '/lib/login-form.php' );
 
@@ -85,6 +89,20 @@ add_theme_support( 'genesis-structural-wraps', array(
 
 //* Rename primary and secondary navigation menus
 add_theme_support( 'genesis-menus' , array( 'primary' => __( 'Before Header Menu', 'jroc' ), 'secondary' => __( 'Footer Menu', 'jroc' ) ) );
+
+
+//* Rename from email
+add_filter( 'wp_mail_from', 'jroc_wp_mail_from' );
+function jroc_wp_mail_from( $original_email_address ) {
+  return 'hello@jroc.net';
+}
+
+
+//* Rename email from name
+add_filter( 'wp_mail_from_name', 'jroc_wp_mail_from_name' );
+function jroc_wp_mail_from_name( $original_email_from ) {
+  return 'JROC';
+}
 
 
 add_action( 'genesis_before', 'jroc_gtm_container' );
@@ -172,14 +190,14 @@ genesis_register_sidebar( array(
 	'description' => __( 'This is the home intro section.', 'jroc' ),
 ) );
 genesis_register_sidebar( array(
+  'id'          => 'home-social',
+  'name'        => __( 'Home Social', 'jroc' ),
+  'description' => __( 'This is the home social section.', 'jroc' ),
+) );
+genesis_register_sidebar( array(
 	'id'          => 'home-features',
 	'name'        => __( 'Home Features', 'jroc' ),
 	'description' => __( 'This is the home features section.', 'jroc' ),
-) );
-genesis_register_sidebar( array(
-	'id'          => 'home-social',
-	'name'        => __( 'Home Social', 'jroc' ),
-	'description' => __( 'This is the home social section.', 'jroc' ),
 ) );
 genesis_register_sidebar( array(
   'id'          => 'board-member-profiles',

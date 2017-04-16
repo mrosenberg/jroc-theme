@@ -114,7 +114,7 @@ body.home {
 }
 
 .home-features .widget {
-  @include breakpoint( $brook ) {
+  @include breakpoint( $stream ) {
     width: 48.717948717948715%;
     float: left;
     margin-left: 2.564102564102564%;
@@ -162,45 +162,52 @@ body.home {
   padding-top: 120px;
   text-align: center;
 
-  .widget_mc4wp_form_widget {
+  .wrap {
+
+    .button,
+    input[type="submit"] {
+      margin:1rem auto;
+      border: 1px solid #000;
+      color:#000;
+      clear:none;
+      font-size:20px;
+    }
+
+    .widget_mc4wp_form_widget {
 
 
-    .mc4wp-form-fields {
+      .mc4wp-form-fields {
 
 
-      p {
-        margin: 1rem auto;
-        padding:1rem 0;
-        clear:both;
-        @include breakpoint( $creek ) {
-          width: 80%;
-        }
-        @include breakpoint( $river ) {
-          width: 60%;
-        }
-
-        label {
-          display: block;
-          visibility: hidden;
-        }
-
-        input[type="email"] {
+        p {
+          margin: 1rem auto;
+          padding:1rem 0;
+          clear:both;
           @include breakpoint( $creek ) {
-            width:70%;
-            float:left;
+            width: 80%;
+          }
+          @include breakpoint( $river ) {
+            width: 60%;
           }
 
-        }
+          label {
+            display: block;
+            visibility: hidden;
+          }
 
-        input[type="submit"] {
-          margin:1rem auto;
-          border: 1px solid #000;
-          color:#000;
-          clear:none;
-          font-size:20px;
-          @include breakpoint( $creek ) {
-            margin:0;
-            float:right;
+          input[type="email"] {
+            @include breakpoint( $creek ) {
+              width:70%;
+              float:left;
+            }
+
+          }
+
+          input[type="submit"] {
+            @include breakpoint( $creek ) {
+              margin:0;
+              float:right;
+            }
           }
         }
       }

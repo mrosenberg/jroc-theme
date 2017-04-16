@@ -32,10 +32,12 @@ Site Header
 
     .site-title {
       position: absolute;
-      top: -15px;
       left: 1rem;
       width: 20%;
       @include transition( width 300ms ease );
+      @include breakpoint( $stream ) {
+        top: -15px;
+      }
 
       a {
 

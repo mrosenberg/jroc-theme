@@ -68,20 +68,17 @@ function jroc_homepage_widgets() {
 		'after'  => '</div></div>',
 	) );
 
-	genesis_widget_area( 'home-pricing', array(
-		'before' => '<div class="home-section home-pricing widget-area"><div class="wrap">',
-		'after'  => '</div></div>',
-	) );
+  genesis_widget_area( 'home-social', array(
+    'before' => '<div class="home-section home-social widget-area"><div class="wrap">',
+    'after'  => '</div></div>',
+  ) );
 
 	genesis_widget_area( 'home-features', array(
 		'before' => '<div class="home-section home-features widget-area"><div class="wrap">',
 		'after'  => '</div></div>',
 	) );
 
-	genesis_widget_area( 'home-social', array(
-		'before' => '<div class="home-section home-social widget-area"><div class="wrap">',
-		'after'  => '</div></div>',
-	) );
+
 
 }
 
