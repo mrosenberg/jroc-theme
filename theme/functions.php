@@ -232,11 +232,10 @@ function jroc_footer_creds_text( $creds ) {
     $link = '<a class="button" href="' . esc_url( wp_logout_url() ) . '">' . __( 'Log out', 'genesis' ) . '</a>';
 
 
-  $creds  = '<p>Website hosting sponsored by <a id="footer-sponsor" href="http://www.albtechrva.com/">www.albtechrva.com</a></p>';
-  $creds .= '<a class="button" href="contact-us">Contact JROC</a>';
+  $creds  = '<a class="button" href="contact-us">Contact JROC</a>';
   $creds .= $link;
   $creds .= sprintf(
-    '<p id="org-info"><small>[footer_copyright] &middot <a href="%s">%s</a> &middot 501(c)(3) JROC c/o James River Park P.O. Box 297 Richmond, Va. 23219</small></p>',
+    '<div><small>[footer_copyright] &middot <a href="%s">%s</a> &middot 501(c)(3) JROC c/o James River Park P.O. Box 297 Richmond, Va. 23219</small></div>',
     $url,
     $name
   );

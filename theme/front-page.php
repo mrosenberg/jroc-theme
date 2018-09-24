@@ -7,6 +7,7 @@
  * @subpackage Customizations
  */
 
+
 //* Enqueue scripts for backstretch
 add_action( 'wp_enqueue_scripts', 'jroc_front_page_enqueue_scripts' );
 function jroc_front_page_enqueue_scripts() {

@@ -20,19 +20,17 @@ body.home {
       }
     }
 
-    &.scrolled {
-      background-color: #6e9f3b;
+    background-color: #6e9f3b;
 
-      nav.nav-primary {
+    nav.nav-primary {
 
-        ul {
-          background-color: #fff;
+      ul {
+        background-color: #fff;
 
-          li {
+        li {
 
-            a {
-              color: #333;
-            }
+          a {
+            color: #333;
           }
         }
       }
@@ -52,7 +50,7 @@ body.home {
 
 .home-intro {
   color: #fff;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 
   .wrap {
