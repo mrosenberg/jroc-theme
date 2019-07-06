@@ -206,7 +206,16 @@ genesis_register_sidebar( array(
   'before_title'  => '<p class="widget-title widgettitle">',
   'after_title'   => "</p>\n",
 ) );
-
+genesis_register_sidebar( array(
+  'id' => 'kotj-landing-top',
+  'name' => __( 'KOTJ Top', 'genesis' ),
+  'description' => __( 'Before Entry Content', 'jroc' ),
+) );
+genesis_register_sidebar( array(
+  'id' => 'kotj-landing-bottom',
+  'name' => __( 'KOTJ Bottom', 'genesis' ),
+  'description' => __( 'After Entry Content', 'jroc' ),
+) );
 
 add_filter( 'genesis_seo_title', 'jroc_site_title_logo', 10, 3 );
 function jroc_site_title_logo( $title, $inside, $wrap ) {
